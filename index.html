@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Random Bouncing Icons</title>
+    <title>Smooth Bouncing Icons</title>
     <style>
         body, html {
             height: 100%;
@@ -15,6 +15,19 @@
             position: absolute;
             width: 50px; /* Adjust size as needed */
             height: 50px; /* Adjust size as needed */
+            animation-duration: 4s; /* Adjust time as needed */
+            animation-timing-function: ease-in-out;
+            animation-iteration-count: infinite;
+        }
+
+        @keyframes bounceToLeft {
+            0%, 100% { bottom: 0; left: 100%; }
+            50% { top: 0; left: 50%; }
+        }
+
+        @keyframes bounceToRight {
+            0%, 100% { bottom: 0; left: 0; }
+            50% { top: 0; left: 50%; }
         }
     </style>
 </head>
@@ -26,17 +39,9 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const icons = document.querySelectorAll('.icon');
-            const width = window.innerWidth;
-            const height = window.innerHeight;
-
-            icons.forEach(icon => {
-                setInterval(() => {
-                    const x = Math.random() * (width - icon.clientWidth);
-                    const y = Math.random() * (height - icon.clientHeight);
-
-                    icon.style.left = `${x}px`;
-                    icon.style.top = `${y}px`;
-                }, 1000); // Change interval as needed
+            icons.forEach((icon, index) => {
+                // Alternate the animation for each icon
+                icon.style.animationName = index % 2 === 0 ? 'bounceToRight' : 'bounceToLeft';
             });
         });
     </script>
