@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smooth Bouncing Icons</title>
+    <title>Thrown Icons Animation</title>
     <style>
         body, html {
             height: 100%;
@@ -16,18 +16,18 @@
             width: 50px; /* Adjust size as needed */
             height: 50px; /* Adjust size as needed */
             animation-duration: 4s; /* Adjust time as needed */
-            animation-timing-function: ease-in-out;
+            animation-timing-function: linear;
             animation-iteration-count: infinite;
         }
 
-        @keyframes bounceToLeft {
-            0%, 100% { bottom: 0; left: 100%; }
-            50% { top: 0; left: 50%; }
+        @keyframes throwRight {
+            0%, 100% { transform: translateX(0) translateY(100vh); }
+            50% { transform: translateX(100vw) translateY(-50vh); }
         }
 
-        @keyframes bounceToRight {
-            0%, 100% { bottom: 0; left: 0; }
-            50% { top: 0; left: 50%; }
+        @keyframes throwLeft {
+            0%, 100% { transform: translateX(100vw) translateY(100vh); }
+            50% { transform: translateX(0) translateY(-50vh); }
         }
     </style>
 </head>
@@ -40,8 +40,7 @@
         document.addEventListener('DOMContentLoaded', () => {
             const icons = document.querySelectorAll('.icon');
             icons.forEach((icon, index) => {
-                // Alternate the animation for each icon
-                icon.style.animationName = index % 2 === 0 ? 'bounceToRight' : 'bounceToLeft';
+                icon.style.animationName = index % 2 === 0 ? 'throwRight' : 'throwLeft';
             });
         });
     </script>
